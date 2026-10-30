@@ -277,6 +277,10 @@ body::after{opacity:.04}
 .mt{background:rgba(255,255,255,.08);border-color:var(--edge);color:var(--ink);transition:transform .8s var(--ease),background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease),translate .6s var(--ease),scale .25s var(--ease)}
 .mt:hover{background:rgba(255,255,255,.14);border-color:var(--edge-hot)}
 .mt.open,.mt.open:hover{background:var(--ink);color:#0b0a10;border-color:transparent}
+/* phones: keep the close button on screen, and the spinning ring from widening the page */
+@media(max-width:620px){.mt.open{transform:none}.mt.open,.mt.open:hover{background:#100f13;color:#fff}}
+#about{overflow-x:clip}
+@media(max-width:700px){.ringtxt{width:min(520px,96vw);height:min(520px,96vw)}}
 </style>
 </head>
 <body id="top"><div class="pr" aria-hidden="true"></div>
@@ -425,7 +429,7 @@ function place(pp){var c1=hero.querySelector('.g1'),c2=hero.querySelector('.g2')
  function cl(v,w){return Math.max(8,Math.min(W-w-8,v))}
  c1.style.right=c2.style.right='auto';
  c1.style.left=cl(hx-hw/2-c1.offsetWidth+(mobile?30:46),c1.offsetWidth)+'px';c1.style.top=(hy-pp*(mobile?.42:.2))+'px';
- c2.style.left=cl(hx+hw/2-(mobile?60:58),c2.offsetWidth)+'px';c2.style.top=(hy+pp*(mobile?.2:.22))+'px'}
+ c2.style.left=cl(hx+hw/2-(mobile?60:58),c2.offsetWidth)+'px';var t2=hy+pp*(mobile?.2:.22);if(mobile){var cp=hero.querySelector('.copy');t2=Math.max(c1.offsetTop+c1.offsetHeight+8,Math.min(t2,cp.offsetTop-c2.offsetHeight-12))}c2.style.top=t2+'px'}
 var W=1,H=1,vh=2*Math.tan(18*Math.PI/180)*5.6,vw=vh,sc=1;
 function size(){W=box.clientWidth||1;H=box.clientHeight||1;R.setSize(W,H,false);cam.aspect=W/H;cam.updateProjectionMatrix();vw=vh*cam.aspect;mobile=W<700;
  var pp=Math.min(W*(mobile?.96:.43),H*(mobile?.64:.6));sc=pp*vh/H;g.scale.setScalar(sc);g.position.set(((mobile?.5:.59)-.5)*vw,(.5-(mobile?.4:.31))*vh,0);
